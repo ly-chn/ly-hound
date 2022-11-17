@@ -1,0 +1,1 @@
+rootProject.name = "ly-code-gen-idea"
