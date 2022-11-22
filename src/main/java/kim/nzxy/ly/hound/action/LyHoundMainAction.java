@@ -30,6 +30,7 @@ public class LyHoundMainAction extends AnAction {
             log.error("未选择表, 无法生成代码");
             return;
         }
+        tableElements[0].getParent();
         LyHoundGeneratorDialog dialog = new LyHoundGeneratorDialog();
         boolean b = dialog.showAndGet();
     }
