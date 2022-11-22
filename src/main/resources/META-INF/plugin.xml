@@ -21,17 +21,12 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.database</depends>
+    <depends optional="true" config-file="database.xml">com.intellij.database</depends>
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
 
     </extensions>
-    <actions>
-        <action id="ly_hound_main_action" class="kim.nzxy.ly.hound.action.LyHoundMainAction" text="LyHound Generator"
-                description="Code generate of lyHound">
-            <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
-        </action>
-    </actions>
+
 </idea-plugin>

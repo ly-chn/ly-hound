@@ -3,6 +3,7 @@ package kim.nzxy.ly.hound.action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import kim.nzxy.ly.hound.dialog.LyHoundGeneratorDialog;
@@ -23,14 +24,13 @@ public class LyHoundMainAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
 
-        Project project = e.getProject();
         PsiElement[] tableElements = e.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
+        Module[] data = e.getData(LangDataKeys.MODULE_CONTEXT_ARRAY);
         if (tableElements == null) {
             log.error("未选择表, 无法生成代码");
             return;
         }
         LyHoundGeneratorDialog dialog = new LyHoundGeneratorDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+        boolean b = dialog.showAndGet();
     }
 }

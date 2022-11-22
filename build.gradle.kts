@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("idea")
     id("org.jetbrains.intellij") version "1.9.0"
 }
 
@@ -50,4 +51,11 @@ dependencies {
     implementation("com.itranswarp:compiler:1.0")
 //    annotationProcessor("org.projectlombok:lombok:1.18.0")
     compileOnly("org.projectlombok:lombok:1.18.0")
+}
+
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
 }

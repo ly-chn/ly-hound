@@ -1,66 +1,37 @@
 package kim.nzxy.ly.hound.dialog;
 
-import lombok.extern.slf4j.Slf4j;
+import com.intellij.application.options.codeStyle.arrangement.ArrangementConstants;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.util.ui.MultiRowFlowPanel;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
 
 /**
+ * 生成器代码注释
  *
- * @author Liaoliao
+ * @author xuyf
+ * @since 2022/11/22 16:56
  */
-@Slf4j
-public class LyHoundGeneratorDialog extends JDialog {
-    private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
-
+public class LyHoundGeneratorDialog extends DialogWrapper {
     public LyHoundGeneratorDialog() {
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-
-        buttonOK.addActionListener(e->onOK());
-
-        buttonCancel.addActionListener(e->onCancel());
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }
-
-    private void onOK() {
-        log.info("user click ok");
-        // add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-        log.info("user click cancel");
-        // add your code here if necessary
-        dispose();
+        super(true);
+        setTitle("LyHound 代码生成");
+        init();
     }
 
     @Override
-    public JPanel getContentPane() {
-        return contentPane;
-    }
+    protected @Nullable JComponent createCenterPanel() {
+        JPanel dialogPanel = new JPanel(new GridLayout(1, 2));
 
-    public static void main(String[] args) {
-        LyHoundGeneratorDialog dialog = new LyHoundGeneratorDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        // System.exit(0);
+        dialogPanel.add(new MultiRowFlowPanel(FlowLayout.LEFT, ArrangementConstants.HORIZONTAL_GAP, ArrangementConstants.VERTICAL_GAP));
+
+        JLabel label = new JLabel("testing");
+        label.setPreferredSize(new Dimension(100, 100));
+        dialogPanel.add(label, BorderLayout.CENTER);
+
+        return dialogPanel;
     }
 }
