@@ -1,15 +1,25 @@
 package kim.nzxy.ly.hound.action;
 
+import com.intellij.database.model.DasNamed;
+import com.intellij.database.model.DasObject;
+import com.intellij.database.model.ObjectKind;
+import com.intellij.database.psi.DbNamespaceImpl;
+import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.containers.JBIterable;
 import kim.nzxy.ly.hound.dialog.LyHoundGeneratorDialog;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 开关主入口
@@ -30,8 +40,11 @@ public class LyHoundMainAction extends AnAction {
             log.error("未选择表, 无法生成代码");
             return;
         }
-        tableElements[0].getParent();
-        LyHoundGeneratorDialog dialog = new LyHoundGeneratorDialog();
+        List<String> selectedTableNameList = Arrays.stream(tableElements).map(t -> (DbTable) t).map(DasNamed::getName).collect(Collectors.toList());
+
+        List<? extends DasObject> tableList = ((DbNamespaceImpl) tableElements[0].getParent()).getDelegate().getDasChildren(ObjectKind.TABLE).toList();
+        List<? extends DasObject> selectedTableList = tableList.stream().filter(it -> selectedTableNameList.contains(it.getName())).collect(Collectors.toList());
+        LyHoundGeneratorDialog dialog = new LyHoundGeneratorDialog(tableList, selectedTableList);
         boolean b = dialog.showAndGet();
     }
 }
