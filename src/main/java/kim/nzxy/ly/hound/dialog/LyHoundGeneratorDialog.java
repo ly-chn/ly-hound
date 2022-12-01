@@ -1,13 +1,9 @@
 package kim.nzxy.ly.hound.dialog;
 
-import com.intellij.application.options.codeStyle.arrangement.ArrangementConstants;
 import com.intellij.database.model.DasObject;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.psi.PsiElement;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBPanel;
-import com.intellij.util.ui.MultiRowFlowPanel;
-import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

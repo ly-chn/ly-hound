@@ -1,9 +1,11 @@
 package kim.nzxy.ly.hound.ui;
 
 import com.intellij.openapi.module.ResourceFileUtil;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.SearchTextField;
 import com.intellij.ui.components.JBCheckBox;
+import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.speedSearch.SpeedSearch;
@@ -39,18 +41,20 @@ public class LyCheckBoxList<T> extends JBPanel<LyCheckBoxList<T>> {
         this.setLayout(new BorderLayout());
 
         JBPanel<?> panel = new JBPanel<>();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new GridLayout(0, 2));
 
 
         JBScrollPane scrollPane = new JBScrollPane();
         scrollPane.setViewportView(panel);
         for (T item : items) {
             JBCheckBox checkBox = new JBCheckBox(namer.fun(item));
+            // todo: 图片大小
+            JBLabel label = new JBLabel(IconLoader.findIcon("/icons/detail.svg"));
             if (selectedItems.contains(item)) {
                 checkBox.setSelected(true);
             }
             map.put(checkBox, item);
-            checkBox.setIcon(ImgUtil.of("/icons/detail.svg"));
+            panel.add(label);
             panel.add(checkBox);
         }
         this.add(scrollPane, BorderLayout.CENTER);
