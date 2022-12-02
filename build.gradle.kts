@@ -49,6 +49,7 @@ dependencies {
     implementation("org.mybatis.generator:mybatis-generator-core:1.4.0")
     implementation("org.freemarker:freemarker:2.3.31")
     implementation("com.itranswarp:compiler:1.0")
+    implementation("com.github.jiconfont:jiconfont-swing:1.0.1")
 //    annotationProcessor("org.projectlombok:lombok:1.18.0")
     compileOnly("org.projectlombok:lombok:1.18.0")
 }

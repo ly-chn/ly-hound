@@ -46,10 +46,11 @@ public class LyCheckBoxList<T> extends JBPanel<LyCheckBoxList<T>> {
 
         JBScrollPane scrollPane = new JBScrollPane();
         scrollPane.setViewportView(panel);
+        Icon icon = ImgUtil.getIcon();
         for (T item : items) {
             JBCheckBox checkBox = new JBCheckBox(namer.fun(item));
-            // todo: 图片大小
-            JBLabel label = new JBLabel(IconLoader.findIcon("/icons/detail.svg"));
+            JBLabel label = new JBLabel(icon);
+            label.setLabelFor(checkBox);
             if (selectedItems.contains(item)) {
                 checkBox.setSelected(true);
             }

@@ -1,21 +1,34 @@
 package kim.nzxy.ly.hound.util;
 
-import com.intellij.openapi.util.IconLoader;
+import jiconfont.DefaultIconCode;
+import jiconfont.IconCode;
+import jiconfont.IconFont;
+import jiconfont.swing.IconFontSwing;
 
 import javax.swing.*;
-import java.net.URL;
-import java.util.Optional;
+import java.io.InputStream;
 
 /**
  * @author xy
  */
 public class ImgUtil {
-    public static ImageIcon of(String path) {
-        Icon icon = IconLoader.findIcon(path);
-        URL url = ImgUtil.class.getResource(path);
-        if (url == null) {
-            throw new RuntimeException();
-        }
-        return new ImageIcon(url);
+    static {
+        IconFontSwing.register(new IconFont() {
+            @Override
+            public String getFontFamily() {
+                return "IconFont";
+            }
+
+            @Override
+            public InputStream getFontInputStream() {
+
+                return ImgUtil.class.getResourceAsStream("/icons/iconfont.ttf");
+            }
+        });
+    }
+
+    public static Icon getIcon() {
+        IconCode iconCode = new DefaultIconCode("IconFont", '\uE793');
+        return IconFontSwing.buildIcon(iconCode, 16);
     }
 }
